@@ -46,9 +46,9 @@ pipeline {
     stage('SonarQube Scan') {
       steps {
         sh """mvn sonar:sonar \
-          -Dsonar.projectKey=JavaWebApp \
-          -Dsonar.host.url=http://10.0.0.66:9000 \
-          -Dsonar.login=c36a98254e1fe8b2680a2f0d81d4a42bdeda859b"""
+            -Dsonar.projectKey=JavaWebApp \
+            -Dsonar.host.url=http://10.0.0.219:9000 \
+            -Dsonar.login=8b0bebfe862c3ad5f30466f4e626000e6a180807"""
       }
     }
     stage('Upload to Artifactory') {
@@ -94,7 +94,7 @@ pipeline {
   post {
     always {
         echo 'Slack Notifications.'
-        slackSend channel: '#team-devops', //update and provide your channel name
+        slackSend channel: '#q4-budget', //update and provide your channel name
         color: COLOR_MAP[currentBuild.currentResult],
         message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
     }
